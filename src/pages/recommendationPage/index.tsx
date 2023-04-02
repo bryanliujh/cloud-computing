@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useState } from "react";
 import { Image, Typography } from "antd";
-import Header from "../components/headerAccount";
+import HeaderAccount from "../components/headerAccount";
 import styles from "@/styles/Home.module.css";
 import { ProductCard } from "../components/card";
 
@@ -9,7 +9,7 @@ export default function RecommendationPage() {
   const { Title } = Typography;
   return (
     <>
-      <Header />
+      <HeaderAccount />
 
       <div className={styles.main}>
         <div style={{ margin: 50, display: "flex" }}>

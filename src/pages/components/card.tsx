@@ -102,7 +102,7 @@ export const ProductCard = ({ showAds }: Props) => {
           >
             Fee: $50009999
           </Text>
-          <Button text="Sign Up" />
+          <Button text="See More" />
         </div>
       </Link>
     </div>
