@@ -1,5 +1,4 @@
 import React from "react";
-import { theme } from "antd";
 import styles from "@/styles/Button.module.css";
 import { CSSProperties } from "react";
 
@@ -13,7 +12,7 @@ type Props = {
   onClick?: () => void;
 };
 
-export const Button = ({
+const Button = ({
   text,
   style,
   type = "primary",
@@ -32,3 +31,5 @@ export const Button = ({
     </AntButton>
   );
 };
+
+export default Button;

@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { ProductCard } from "./components/card";
+import ProductCard from "./components/card";
 import Header from "./components/header";
 import styles from "@/styles/Home.module.css";
 import { Typography, Input, Modal, Radio } from "antd";

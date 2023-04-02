@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Image, Typography } from "antd";
 import HeaderAccount from "../components/headerAccount";
 import styles from "@/styles/Home.module.css";
-import { ProductCard } from "../components/card";
+import ProductCard from "../components/card";
 
 export default function RecommendationPage() {
   const { Title } = Typography;

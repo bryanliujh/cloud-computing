@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { mockCloudComputingCourse } from "../api/mock";
-import { Button } from "./button";
+import Button from "./button";
 import styles from "@/styles/Card.module.css";
 import { Avatar, Typography } from "antd";
 import { ShopFilled } from "@ant-design/icons";
@@ -10,7 +10,7 @@ type Props = {
   showAds?: boolean;
 };
 
-export const ProductCard = ({ showAds }: Props) => {
+const ProductCard = ({ showAds }: Props) => {
   const [isLoading, setLoading] = useState(true);
   const { Title, Text, Paragraph } = Typography;
 
@@ -108,3 +108,5 @@ export const ProductCard = ({ showAds }: Props) => {
     </div>
   );
 };
+
+export default ProductCard;

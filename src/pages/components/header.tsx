@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Input, Modal, Radio } from "antd";
-import { Button } from "./button";
+import Button from "./button";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";

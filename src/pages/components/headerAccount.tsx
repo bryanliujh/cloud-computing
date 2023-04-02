@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "./button";
+import Button from "./button";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
