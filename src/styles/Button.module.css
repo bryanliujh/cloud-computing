@@ -1,0 +1,29 @@
+.primary {
+  background: #f9f9ff;
+  border-color: #002ac0;
+  width: 102px;
+  height: 39px;
+  border-radius: 10;
+  box-shadow: "none";
+  color: #002ac0;
+}
+
+.primary:hover {
+  background: #002ac0;
+  color: #f9f9ff !important;
+}
+
+.secondary {
+  background: #002ac0;
+  color: #f9f9ff;
+  width: 102px;
+  height: 39px;
+  border-radius: 10;
+  box-shadow: "none";
+}
+
+.secondary:hover {
+  background: #f9f9ff;
+  border-color: #002ac0;
+  color: #002ac0 !important;
+}
