@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { mockCloudComputingCourse } from "../api/mock";
@@ -17,7 +16,7 @@ export const ProductCard = ({ showAds }: Props) => {
 
   return (
     <div className={styles.main} style={{ margin: 15 }}>
-      <Link href={`/products/productid`} style={{ textDecoration: "none" }}>
+      <Link href={`/detailPage`} style={{ textDecoration: "none" }}>
         <div
           style={{
             flexDirection: "row",

@@ -10,6 +10,7 @@ type Props = {
   type?: "secondary" | "primary";
   style?: CSSProperties;
   size?: "small" | "middle" | "large";
+  onClick?: () => void;
 };
 
 export const Button = ({
@@ -17,10 +18,16 @@ export const Button = ({
   style,
   type = "primary",
   size = "large",
+  onClick,
 }: Props) => {
   const className = type === "primary" ? styles.primary : styles.secondary;
   return (
-    <AntButton className={className} style={style} size={size}>
+    <AntButton
+      className={className}
+      style={style}
+      size={size}
+      onClick={onClick}
+    >
       {text}
     </AntButton>
   );

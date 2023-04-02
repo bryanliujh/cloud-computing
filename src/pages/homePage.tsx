@@ -1,34 +1,18 @@
 import Head from "next/head";
 import { ProductCard } from "./components/card";
-import { Button } from "./components/button";
+import Header from "./components/header";
 import styles from "@/styles/Home.module.css";
-import { Typography, Input } from "antd";
+import { Typography, Input, Modal, Radio } from "antd";
 
 export default function Home() {
   const { Title } = Typography;
+
   return (
     <>
       <Head>
         <title>UpSkillz</title>
       </Head>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          margin: 50,
-        }}
-      >
-        <Button
-          text="Log In"
-          style={{ width: 100, height: 50, marginRight: 15 }}
-          type={"secondary"}
-        />
-        <Button
-          text="Register Now"
-          style={{ width: 150, height: 50 }}
-          type={"secondary"}
-        />
-      </div>
+      <Header />
       <main className={styles.main}>
         <div style={{ margin: 50, display: "flex" }}>
           <p style={{ fontSize: 70, textAlign: "center", fontWeight: 700 }}>
