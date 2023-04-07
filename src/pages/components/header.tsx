@@ -1,12 +1,24 @@
 import React, { useState } from "react";
-import { Input, Modal, Radio } from "antd";
+import { Input, Modal, Radio, Form } from "antd";
 import Button from "./button";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { postRegistration } from "../api/registration";
+import { authenticateLogin } from "../api/authenticate";
 
 export default function Header() {
   const router = useRouter();
+  const [form] = Form.useForm();
+  const email = Form.useWatch("email", form);
+  const skills = Form.useWatch("skills", form);
+  const address = Form.useWatch("address", form);
+  const password = Form.useWatch("password", form);
+  const [premium, setPremium] = useState(true);
+
+  const loginEmail = Form.useWatch("loginEmail", form);
+  const loginPassword = Form.useWatch("loginPassword", form);
+
   /**
    * Login Modal Logic
    */
@@ -15,13 +27,17 @@ export default function Header() {
   const showLoginModal = () => {
     setOpenLogin(true);
   };
-  const handleLoginOk = () => {
+  const handleLoginOk = async () => {
     setConfirmLoginLoading(true);
-    setTimeout(() => {
+    const isLogin = await authenticateLogin({
+      password: loginPassword,
+      email: loginEmail,
+    });
+    setConfirmLoginLoading(false);
+    if (isLogin) {
+      router.push("/recommendationPage");
       setOpenLogin(false);
-      setConfirmLoginLoading(false);
-    }, 2000);
-    router.push("/recommendationPage");
+    }
   };
   const handleLoginCancel = () => {
     setOpenLogin(false);
@@ -35,12 +51,19 @@ export default function Header() {
   const showRegisterModal = () => {
     setOpenRegister(true);
   };
-  const handleRegisterOk = () => {
+  const handleRegisterOk = async () => {
     setConfirmRegisterLoading(true);
-    setTimeout(() => {
+    const isRegisteredSuccess = await postRegistration({
+      password,
+      premium,
+      address,
+      skills,
+      email,
+    });
+    setConfirmRegisterLoading(false);
+    if (isRegisteredSuccess) {
       setOpenRegister(false);
-      setConfirmRegisterLoading(false);
-    }, 2000);
+    }
   };
   const handleReigsterCancel = () => {
     setOpenRegister(false);
@@ -48,58 +71,86 @@ export default function Header() {
 
   return (
     <div>
-      {/* {Login Popup} */}
-      <Modal
-        open={openLogin}
-        onOk={handleLoginOk}
-        confirmLoading={confirmLoginLoading}
-        onCancel={handleLoginCancel}
-        okText={"Log In"}
-      >
-        <Input
-          size="large"
-          placeholder="Enter Email"
-          style={{ display: "flex", marginBottom: 20, marginTop: 20 }}
-        />
-        <Input.Password
-          size="large"
-          placeholder="Enter Password"
-          style={{ display: "flex" }}
-        />
-      </Modal>
-      {/* {Register Popup} */}
-      <Modal
-        open={openRegister}
-        onOk={handleRegisterOk}
-        confirmLoading={confirmRegisterLoading}
-        onCancel={handleReigsterCancel}
-        okText={"Sign Up"}
-      >
-        <Input
-          size="large"
-          placeholder="Enter Email"
-          style={{ display: "flex", marginBottom: 20, marginTop: 20 }}
-        />
-        <Input.Password
-          size="large"
-          placeholder="Enter Password"
-          style={{ display: "flex", marginBottom: 20 }}
-        />
-        <Input
-          size="large"
-          placeholder="Enter Skills"
-          style={{ display: "flex", marginBottom: 20 }}
-        />
-        <Input
-          size="large"
-          placeholder="Enter Address"
-          style={{ display: "flex", marginBottom: 20 }}
-        />
-        <Radio.Group defaultValue="a" buttonStyle="solid">
-          <Radio.Button value="a">Premium Plan</Radio.Button>
-          <Radio.Button value="b">Basic Plan</Radio.Button>
-        </Radio.Group>
-      </Modal>
+      <Form form={form}>
+        {/* {Login Popup} */}
+        <Modal
+          open={openLogin}
+          onOk={handleLoginOk}
+          confirmLoading={confirmLoginLoading}
+          onCancel={handleLoginCancel}
+          okText={"Log In"}
+        >
+          <Form.Item name={"loginEmail"}>
+            <Input
+              size="large"
+              placeholder="Enter Email"
+              style={{ display: "flex", marginBottom: 20, marginTop: 20 }}
+            />
+          </Form.Item>
+          <Form.Item name={"loginPassword"}>
+            <Input.Password
+              size="large"
+              placeholder="Enter Password"
+              style={{ display: "flex" }}
+            />
+          </Form.Item>
+        </Modal>
+        {/* {Register Popup} */}
+        <Modal
+          open={openRegister}
+          onOk={handleRegisterOk}
+          confirmLoading={confirmRegisterLoading}
+          onCancel={handleReigsterCancel}
+          okText={"Sign Up"}
+        >
+          <Form.Item name={"email"}>
+            <Input
+              size="large"
+              placeholder="Enter Email"
+              style={{ display: "flex", marginBottom: 20, marginTop: 20 }}
+            />
+          </Form.Item>
+          <Form.Item name={"password"}>
+            <Input.Password
+              size="large"
+              placeholder="Enter Password"
+              style={{ display: "flex", marginBottom: 20 }}
+            />
+          </Form.Item>
+          <Form.Item name={"skills"}>
+            <Input
+              size="large"
+              placeholder="Enter Skills"
+              style={{ display: "flex", marginBottom: 20 }}
+            />
+          </Form.Item>
+          <Form.Item name={"address"}>
+            <Input
+              size="large"
+              placeholder="Enter Address"
+              style={{ display: "flex", marginBottom: 20 }}
+            />
+          </Form.Item>
+
+          {/**check this */}
+          <Form.Item name={"premium"}>
+            <Radio.Group
+              defaultValue="premium"
+              buttonStyle="solid"
+              onChange={(e) => {
+                if (e.target.value === "premium") {
+                  setPremium(true);
+                } else {
+                  setPremium(false);
+                }
+              }}
+            >
+              <Radio.Button value="premium">Premium Plan</Radio.Button>
+              <Radio.Button value="basic">Basic Plan</Radio.Button>
+            </Radio.Group>
+          </Form.Item>
+        </Modal>
+      </Form>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div
           style={{
