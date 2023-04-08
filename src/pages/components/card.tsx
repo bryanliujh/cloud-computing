@@ -1,17 +1,16 @@
 import Link from "next/link";
-import { useState } from "react";
-import { mockCloudComputingCourse } from "../api/mock";
 import Button from "./button";
 import styles from "@/styles/Card.module.css";
 import { Avatar, Typography } from "antd";
 import { ShopFilled } from "@ant-design/icons";
+import { Course } from "../api/search";
 
 type Props = {
   showAds?: boolean;
+  course?: Course;
 };
 
-const ProductCard = ({ showAds }: Props) => {
-  const [isLoading, setLoading] = useState(true);
+const ProductCard = ({ showAds, course }: Props) => {
   const { Title, Text, Paragraph } = Typography;
 
   return (
@@ -42,13 +41,15 @@ const ProductCard = ({ showAds }: Props) => {
                 justifyContent: "flex-start",
                 alignItems: "flex-start",
                 marginLeft: 10,
+                width: 165,
+                overflow: "hidden",
               }}
             >
-              <Title style={{ margin: 0 }} level={3} ellipsis={true}>
-                NUS
+              <Title style={{ margin: 0 }} level={3} ellipsis={{ rows: 1 }}>
+                {`${course?.Provider}`}
               </Title>
               <Text style={{ margin: 0 }} ellipsis={true}>
-                FullTime
+                {`${course?.Duration} Hour`}
               </Text>
             </div>
           </div>
@@ -70,7 +71,7 @@ const ProductCard = ({ showAds }: Props) => {
         </div>
         <div>
           <Title style={{ margin: 20, marginTop: 0 }} level={3} ellipsis={true}>
-            Cloud Computing
+            {`${course?.Title}`}
           </Title>
         </div>
         <div style={{ display: "flex" }}>
@@ -82,8 +83,7 @@ const ProductCard = ({ showAds }: Props) => {
             }}
             ellipsis={{ rows: 3 }}
           >
-            Lorem ipsum Mi sit lorem mollis vitae quis curabitur vestibulum. Mi
-            sit lorem mollis vitae quis curabitur vestibulum.Mi sit lorem
+            {`${course?.Description}`}
           </Paragraph>
         </div>
         <div
@@ -100,7 +100,7 @@ const ProductCard = ({ showAds }: Props) => {
             style={{ margin: 0, marginRight: 20, fontSize: 20 }}
             ellipsis={true}
           >
-            Fee: $50009999
+            {`Fee: $${course?.Price}`}
           </Text>
           <Button text="See More" />
         </div>

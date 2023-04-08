@@ -2,10 +2,24 @@ import Head from "next/head";
 import ProductCard from "./components/card";
 import Header from "./components/header";
 import styles from "@/styles/Home.module.css";
-import { Typography, Input, Modal, Radio } from "antd";
+import { Typography, Input } from "antd";
+import { useEffect, useState } from "react";
+import { searchCourse } from "./api/search";
+
+import type { Course } from "./api/search";
 
 export default function Home() {
   const { Title } = Typography;
+  const [courseList, setCourseList] = useState<Course[] | never[]>([]);
+  const [titleFilter, setTitleFilter] = useState<string>("");
+
+  useEffect(() => {
+    const fetchCourse = async () => {
+      const searchList = await searchCourse({ limit: 12, title: titleFilter });
+      setCourseList(searchList);
+    };
+    fetchCourse();
+  }, [titleFilter]);
 
   return (
     <>
@@ -24,9 +38,12 @@ export default function Home() {
         <div className={styles.searchBox}>
           <Input.Search
             size="large"
-            placeholder="Search Title or Keyword"
+            placeholder="Search Full Title"
             enterButton
             style={{ display: "flex" }}
+            onSearch={(value) => {
+              setTitleFilter(value);
+            }}
           />
         </div>
         <div style={{ marginBottom: 50 }}>
@@ -34,19 +51,9 @@ export default function Home() {
         </div>
         <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
           <div className={styles.grid}>
-            {/* {data &&
-              data.map((product) => (
-                <ProductCard product={product} key={product.id} />
-              ))} */}
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
+            {courseList?.map?.((course, index) => {
+              return <ProductCard course={course} key={index} />;
+            })}
           </div>
         </div>
       </main>
