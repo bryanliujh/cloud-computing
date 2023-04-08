@@ -1,10 +1,10 @@
 import Head from "next/head";
 import ProductCard from "./components/card";
-import Header from "./components/header";
 import styles from "@/styles/Home.module.css";
 import { Typography, Input } from "antd";
 import { useEffect, useState } from "react";
 import { searchCourse } from "./api/search";
+import ActionBar from "./components/actionBar";
 
 import type { Course } from "./api/search";
 
@@ -26,7 +26,7 @@ export default function Home() {
       <Head>
         <title>UpSkillz</title>
       </Head>
-      <Header />
+      <ActionBar />
       <main className={styles.main}>
         <div style={{ margin: 50, display: "flex" }}>
           <p style={{ fontSize: 70, textAlign: "center", fontWeight: 700 }}>
@@ -52,7 +52,7 @@ export default function Home() {
         <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
           <div className={styles.grid}>
             {courseList?.map?.((course, index) => {
-              return <ProductCard course={course} key={index} />;
+              return <ProductCard course={course} key={index} index={index} />;
             })}
           </div>
         </div>

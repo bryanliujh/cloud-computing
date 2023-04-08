@@ -3,9 +3,12 @@ import Button from "./button";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useRecoilState } from "recoil";
+import { accountState } from "../atom/account";
 
 export default function HeaderAccount() {
   const router = useRouter();
+  const [_, setAccountState] = useRecoilState(accountState);
 
   return (
     <div>
@@ -33,6 +36,7 @@ export default function HeaderAccount() {
             style={{ width: 100, height: 50, marginRight: 15 }}
             type={"secondary"}
             onClick={() => {
+              setAccountState(null);
               router.push("/");
             }}
           />

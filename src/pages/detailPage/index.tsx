@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useState } from "react";
+import React from "react";
 import { Image, Typography, Descriptions } from "antd";
-import Header from "../components/header";
 import styles from "@/styles/Detail.module.css";
 import { useRouter } from "next/router";
 import { Course } from "../api/search";
+import ActionBar from "../components/actionBar";
 
 export default function DetailPage() {
   const { Title } = Typography;
@@ -12,7 +12,7 @@ export default function DetailPage() {
   const data: Partial<Course> = router.query;
   return (
     <>
-      <Header />
+      <ActionBar />
       <div className={styles.main}>
         <div
           style={{

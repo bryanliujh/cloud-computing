@@ -6,6 +6,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { postRegistration } from "../api/registration";
 import { authenticateLogin } from "../api/authenticate";
+import { useRecoilState } from "recoil";
+import { accountState } from "../atom/account";
 
 export default function Header() {
   const router = useRouter();
@@ -23,18 +25,20 @@ export default function Header() {
    * Login Modal Logic
    */
   const [openLogin, setOpenLogin] = useState(false);
+  const [_, setAccountState] = useRecoilState(accountState);
   const [confirmLoginLoading, setConfirmLoginLoading] = useState(false);
   const showLoginModal = () => {
     setOpenLogin(true);
   };
   const handleLoginOk = async () => {
     setConfirmLoginLoading(true);
-    const isLogin = await authenticateLogin({
+    const loginObj = await authenticateLogin({
       password: loginPassword,
       email: loginEmail,
     });
     setConfirmLoginLoading(false);
-    if (isLogin) {
+    if (loginObj?.authenticate) {
+      setAccountState(loginObj);
       router.push("/recommendationPage");
       setOpenLogin(false);
     }

@@ -4,14 +4,18 @@ import styles from "@/styles/Card.module.css";
 import { Avatar, Typography } from "antd";
 import { ShopFilled } from "@ant-design/icons";
 import { Course } from "../api/search";
+import { useRecoilState } from "recoil";
+import { accountState } from "../atom/account";
 
 type Props = {
-  showAds?: boolean;
   course?: Course;
+  index?: number;
 };
 
-const ProductCard = ({ showAds, course }: Props) => {
+const ProductCard = ({ course, index }: Props) => {
   const { Title, Text, Paragraph } = Typography;
+  const [account] = useRecoilState(accountState);
+  const showAds = !account?.premium && index === 2;
 
   return (
     <div className={styles.main} style={{ margin: 15 }}>
@@ -51,26 +55,29 @@ const ProductCard = ({ showAds, course }: Props) => {
               <Title style={{ margin: 0 }} level={3} ellipsis={{ rows: 1 }}>
                 {`${course?.Provider}`}
               </Title>
-              <Text style={{ margin: 0 }} ellipsis={true}>
+              <Text
+                style={{ margin: 0, display: "flex", flex: 1 }}
+                ellipsis={true}
+              >
                 {`${course?.Duration} Hour`}
               </Text>
+              {showAds ? (
+                <div
+                  style={{
+                    display: "flex",
+                    marginRight: 20,
+                  }}
+                >
+                  <Button
+                    text="Ads"
+                    style={{ width: 40 }}
+                    type="secondary"
+                    size="small"
+                  />
+                </div>
+              ) : null}
             </div>
           </div>
-          {showAds ? (
-            <div
-              style={{
-                display: "flex",
-                marginRight: 20,
-              }}
-            >
-              <Button
-                text="Ads"
-                style={{ width: 40 }}
-                type="secondary"
-                size="small"
-              />
-            </div>
-          ) : null}
         </div>
         <div>
           <Title style={{ margin: 20, marginTop: 0 }} level={3} ellipsis={true}>
@@ -80,7 +87,7 @@ const ProductCard = ({ showAds, course }: Props) => {
         <div style={{ display: "flex" }}>
           <Paragraph
             style={{
-              marginBottom: 20,
+              marginBottom: showAds ? 20 : 40,
               marginLeft: 20,
               marginRight: 20,
             }}

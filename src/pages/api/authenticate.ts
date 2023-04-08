@@ -6,10 +6,18 @@ export type Login = {
   email: string;
 };
 
+export type Account = {
+  premium: boolean;
+  authenticate: boolean;
+};
+
 export const LOGIN_ENDPOINT =
   "https://hjvwi5jmcl.execute-api.ap-southeast-1.amazonaws.com/dev/authentication";
 
-export const authenticateLogin = async ({ password, email }: Login) => {
+export const authenticateLogin = async ({
+  password,
+  email,
+}: Login): Promise<Account> => {
   const params = jsonToQueryString({
     password: hashText(password),
     email,
@@ -21,5 +29,5 @@ export const authenticateLogin = async ({ password, email }: Login) => {
     },
   });
   const json = await data.json();
-  return json?.authenticate;
+  return json;
 };
