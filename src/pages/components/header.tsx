@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { postRegistration } from "../api/registration";
 import { authenticateLogin } from "../api/authenticate";
 import { useRecoilState } from "recoil";
-import { accountState } from "../atom/account";
+import accountState from "../atom/account";
 
 export default function Header() {
   const router = useRouter();

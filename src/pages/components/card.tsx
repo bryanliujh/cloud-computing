@@ -5,7 +5,7 @@ import { Avatar, Typography } from "antd";
 import { ShopFilled } from "@ant-design/icons";
 import { Course } from "../api/search";
 import { useRecoilState } from "recoil";
-import { accountState } from "../atom/account";
+import accountState from "../atom/account";
 
 type Props = {
   course?: Course;

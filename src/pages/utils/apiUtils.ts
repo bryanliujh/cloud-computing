@@ -1,4 +1,4 @@
-export function jsonToQueryString(
+export default function jsonToQueryString(
   json: Record<
     string,
     string | null | undefined | number | boolean | Array<any>

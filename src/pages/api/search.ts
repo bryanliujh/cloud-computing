@@ -1,4 +1,4 @@
-import { jsonToQueryString } from "../utils/apiUtils";
+import jsonToQueryString from "../utils/apiUtils";
 
 export type SearchParam = {
   limit?: number;

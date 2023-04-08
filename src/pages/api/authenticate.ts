@@ -1,5 +1,5 @@
-import { hashText } from "../utils/hashUtils";
-import { jsonToQueryString } from "../utils/apiUtils";
+import hashText from "../utils/hashUtils";
+import jsonToQueryString from "../utils/apiUtils";
 
 export type Login = {
   password: string;

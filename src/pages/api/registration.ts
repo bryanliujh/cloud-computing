@@ -1,4 +1,4 @@
-import { hashText } from "../utils/hashUtils";
+import hashText from "../utils/hashUtils";
 
 export type Registration = {
   password: string;
