@@ -3,7 +3,7 @@ import React from "react";
 import { Image, Typography, Descriptions } from "antd";
 import styles from "@/styles/Detail.module.css";
 import { useRouter } from "next/router";
-import { Course } from "../api/search";
+import { Course } from "../../api/search";
 import ActionBar from "../components/actionBar";
 
 export default function DetailPage() {

@@ -3,7 +3,7 @@ import Button from "./button";
 import styles from "@/styles/Card.module.css";
 import { Avatar, Typography } from "antd";
 import { ShopFilled } from "@ant-design/icons";
-import { Course } from "../api/search";
+import { Course } from "../../api/search";
 import { useRecoilState } from "recoil";
 import accountState from "../../atom/account";
 

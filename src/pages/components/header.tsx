@@ -4,8 +4,8 @@ import Button from "./button";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { postRegistration } from "../api/registration";
-import { authenticateLogin } from "../api/authenticate";
+import { postRegistration } from "../../api/registration";
+import { authenticateLogin } from "../../api/authenticate";
 import { useRecoilState } from "recoil";
 import accountState from "../../atom/account";
 

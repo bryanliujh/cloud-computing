@@ -3,10 +3,10 @@ import ProductCard from "./components/card";
 import styles from "@/styles/Home.module.css";
 import { Typography, Input } from "antd";
 import { useEffect, useState } from "react";
-import { searchCourse } from "./api/search";
+import { searchCourse } from "../api/search";
 import ActionBar from "./components/actionBar";
 
-import type { Course } from "./api/search";
+import type { Course } from "../api/search";
 
 export default function Home() {
   const { Title } = Typography;
