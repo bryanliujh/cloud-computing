@@ -15,7 +15,10 @@ const ProductCard = ({ showAds, course }: Props) => {
 
   return (
     <div className={styles.main} style={{ margin: 15 }}>
-      <Link href={`/detailPage`} style={{ textDecoration: "none" }}>
+      <Link
+        href={{ pathname: `/detailPage`, query: course }}
+        style={{ textDecoration: "none" }}
+      >
         <div
           style={{
             flexDirection: "row",

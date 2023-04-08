@@ -3,9 +3,13 @@ import React, { useState } from "react";
 import { Image, Typography, Descriptions } from "antd";
 import Header from "../components/header";
 import styles from "@/styles/Detail.module.css";
+import { useRouter } from "next/router";
+import { Course } from "../api/search";
 
 export default function DetailPage() {
   const { Title } = Typography;
+  const router = useRouter();
+  const data: Partial<Course> = router.query;
   return (
     <>
       <Header />
@@ -29,44 +33,29 @@ export default function DetailPage() {
           </div>
           <div style={{ marginLeft: 50 }}>
             <Title style={{ margin: 0, marginBottom: 20 }}>
-              Cloud Computing
+              {data?.Title || "Cloud Computing"}
             </Title>
             <Descriptions title="" bordered>
-              <Descriptions.Item label="Product">
-                Cloud Database
+              <Descriptions.Item label="Category">
+                {data?.Category || "Cloud"}
               </Descriptions.Item>
-              <Descriptions.Item label="Billing Mode">
-                Prepaid
+              <Descriptions.Item label="Course Id">
+                {data?.Course_Id || "123"}
               </Descriptions.Item>
-              <Descriptions.Item label="Automatic Renewal">
-                YES
+              <Descriptions.Item label="Duration">
+                {data?.Duration ? `${data?.Duration} hours` : "5 hours"}
               </Descriptions.Item>
-              <Descriptions.Item label="Order time">
-                2018-04-24 18:00:00
+              <Descriptions.Item label="Price">
+                {data?.Price ? `$${data?.Price}` : "$5"}
               </Descriptions.Item>
-              <Descriptions.Item label="Usage Time" span={2}>
-                2019-04-24 18:00:00
+              <Descriptions.Item label="Provider">
+                {data?.Provider || "NUS"}
               </Descriptions.Item>
-              <Descriptions.Item label="Negotiated Amount">
-                $80.00
+              <Descriptions.Item label="Taggings">
+                {data?.Taggings || "tag1"}
               </Descriptions.Item>
-              <Descriptions.Item label="Discount">$20.00</Descriptions.Item>
-              <Descriptions.Item label="Official Receipts">
-                $60.00
-              </Descriptions.Item>
-              <Descriptions.Item label="Config Info">
-                Data disk type: MongoDB
-                <br />
-                Database version: 3.4
-                <br />
-                Package: dds.mongo.mid
-                <br />
-                Storage space: 10 GB
-                <br />
-                Replication factor: 3
-                <br />
-                Region: East China 1
-                <br />
+              <Descriptions.Item label="Description" span={3}>
+                {data?.Description || "abcde"}
               </Descriptions.Item>
             </Descriptions>
           </div>
