@@ -52,7 +52,7 @@ export default function DetailPage() {
                 {data?.Provider || "NUS"}
               </Descriptions.Item>
               <Descriptions.Item label="Taggings">
-                {data?.Taggings || "tag1"}
+                {data?.Taggings || ""}
               </Descriptions.Item>
               <Descriptions.Item label="Description" span={3}>
                 {data?.Description || "abcde"}
